@@ -49,6 +49,8 @@ class BSA_Plugin
     // Add Menu Items
     add_action("admin_print_styles-$bsa_admin_page", array( $this, 'bsa_admin_load' ) );
   
+	// Update network configuration info
+	bsa_update_network();
   }
   
   /**
@@ -108,6 +110,29 @@ class BSA_Plugin
   {
     delete_option( 'buysellads_callbacks' );
   }
+
+  /**
+   * Updates the network configuration from S3
+   */
+  function bsa_update_network()
+  {
+	update_option('buysellads_network', get_privatelabel_json());
+  }
+
+  /**
+   * Updates the CDN Data
+   * 
+   * @uses delete_option()
+   */
+  function bsa_update_cdn()
+  {
+    // new options
+	$buysellads_cdn = $_POST['buysellads_cdn'];
+	$cdns = buysellads_cdns();
+	
+	// Make sure the CDN is valid before saving it.
+    update_option( 'buysellads_cdn' , (in_array($buysellads_cdn, $cdns) ? $buysellads_cdn : 's3.buysellads.com'));
+  }
   
   /**
    * Load Scripts & Styles
@@ -132,6 +157,7 @@ class BSA_Plugin
       // Save posted values
       update_option( 'bsa_site_key', $bsa_site_key );
       update_option( 'bsa_body_open', $bsa_body_open );
+	  bsa_update_cdn();
       
       $json_data = get_buysellads_json();
       if ($json_data)

@@ -30,3 +30,4 @@ $lang['reset_callbacks'] = 'Reset Callbacks';
 $lang['callbacks_message'] = 'Are you sure you want to reset ALL of your callback settings?';
 $lang['callbacks_updated'] = 'Backfill <strong>Updated</strong>.';
 $lang['callbacks_error'] = 'Backfill <strong>Deleted</strong>.';
+$lang['network'] = 'Network';

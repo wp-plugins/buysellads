@@ -198,3 +198,23 @@ if (!function_exists('get_buysellads_json'))
     }
   }
 }
+
+/**
+ * Function to grab the configuration information for private labels
+ *
+ * @uses file_get_contents()
+ * @uses json_decode()
+ * @return JSON array
+ */
+if (!function_exists('get_privatelabel_json'))
+{
+	function get_privatelabel_json()
+	{
+      	$json_url = "http://s3.buysellads.com/config/wordpress.js";
+      	$json_contents = @file_get_contents($json_url);
+		$json = json_decode($json_contents, true);
+
+      	// If @file_get_contents($json_url) returns true
+		return ($json_contents  && isset($json['networks'])? $json['networks'] : array());
+    }
+}

@@ -19,3 +19,4 @@ $lang['empty_site_key'] = 'A Site key has not been added yet. <a href="%s">Add O
 $lang['bsa_body_open'] = 'Asynchronous Code';
 $lang['bsa_body_open_desc'] = 'Directly after the opening <strong>&lt;body&gt;</strong> tag insert <strong>&lt;?php if (function_exists(\'wp_body_open\')) { wp_body_open(); } ?&gt;</strong>. Otherwise, the necessary code snippet will be inserted using <strong>&lt;?php wp_footer(); ?&gt;</strong>';
 $lang['submit_settings'] = 'Save Settings';
+$lang['network'] = 'Network';

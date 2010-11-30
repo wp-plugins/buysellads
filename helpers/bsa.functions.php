@@ -212,13 +212,15 @@ if (!function_exists('get_privatelabel_json'))
 {
 	function get_privatelabel_json()
 	{
-		$cdn = get_option( 'buysellads_cdn', 's3.buysellads.com');
-      	$json_url = "http://{$cdn}/config/wordpress.js";
+      	$json_url = "http://s3.buysellads.com/config/wordpress.js";
       	$json_contents = @file_get_contents($json_url);
 		$json = json_decode($json_contents, true);
+		
+		// If @file_get_contents($json_url) returns true
+		$r = $json_contents  && isset($json['networks']) ? $json['networks'] : array();
+		set_option('buysellads_network', $r);
 
-      	// If @file_get_contents($json_url) returns true
-		return ($json_contents  && isset($json['networks'])? $json['networks'] : array());
+		return $r;
     }
 }
 
@@ -232,8 +234,8 @@ if (!function_exists('buysellads_cdns'))
 {
 	function buysellads_cdns()
 	{
-		$json = get_option( 'buysellads_network', array('networks' => array()));
-		return array_map('buysellads_cdns_helper', $json['networks']);
+		$json = get_option('buysellads_network', get_privatelabel_json());
+		return array_map('buysellads_cdns_helper', $json);
     }
 }
 
@@ -245,6 +247,6 @@ if (!function_exists('buysellads_cdns_helper'))
 {
 	function buysellads_cdns_helper($network)
 	{
-		return $networks['cdn'];
+		return $network['cdn'];
     }
 }

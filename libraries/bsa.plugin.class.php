@@ -21,6 +21,14 @@ class BSA_Plugin
   {
     register_widget('BSA_Widget');
   }
+
+  /**
+   * Updates the network configuration from S3
+   */
+  function bsa_update_network()
+  {
+	update_option('buysellads_network', get_privatelabel_json());
+  }
   
   /**
    * Add Menu Item
@@ -48,9 +56,6 @@ class BSA_Plugin
     
     // Add Menu Items
     add_action("admin_print_styles-$bsa_admin_page", array( $this, 'bsa_admin_load' ) );
-  
-	// Update network configuration info
-	bsa_update_network();
   }
   
   /**
@@ -110,29 +115,6 @@ class BSA_Plugin
   {
     delete_option( 'buysellads_callbacks' );
   }
-
-  /**
-   * Updates the network configuration from S3
-   */
-  function bsa_update_network()
-  {
-	update_option('buysellads_network', get_privatelabel_json());
-  }
-
-  /**
-   * Updates the CDN Data
-   * 
-   * @uses delete_option()
-   */
-  function bsa_update_cdn()
-  {
-    // new options
-	$buysellads_cdn = $_POST['buysellads_cdn'];
-	$cdns = buysellads_cdns();
-	
-	// Make sure the CDN is valid before saving it.
-    update_option( 'buysellads_cdn' , (in_array($buysellads_cdn, $cdns) ? $buysellads_cdn : 's3.buysellads.com'));
-  }
   
   /**
    * Load Scripts & Styles
@@ -157,7 +139,13 @@ class BSA_Plugin
       // Save posted values
       update_option( 'bsa_site_key', $bsa_site_key );
       update_option( 'bsa_body_open', $bsa_body_open );
-	  bsa_update_cdn();
+	  
+	  // new cdn
+	  $buysellads_cdn = $_POST['buysellads_cdn'];
+	  $cdns = buysellads_cdns();
+	
+	  // Make sure the CDN is valid before saving it.
+      update_option( 'buysellads_cdn' , (in_array($buysellads_cdn, $cdns) ? $buysellads_cdn : 's3.buysellads.com'));
       
       $json_data = get_buysellads_json();
       if ($json_data)
@@ -213,6 +201,20 @@ class BSA_Plugin
                 <span class="description"><?php echo $bsa_lang->line('site_key_desc'); ?></span>
               </td>
             </tr>
+
+            <tr valign="top">
+              <th scope="row">
+                <label for="bsa_network"><?php echo $bsa_lang->line('network'); ?></label>
+              </th>
+              <td>
+				<select  id="bsa_network" name="buysellads_cdn">
+				<?php foreach(get_privatelabel_json() as $network): ?>
+					  <option <?php echo(stripos($network['cdn'], get_option('buysellads_cdn', 's3.buysellads.com')) === false ? '' : 'selected'); ?> value=<?php echo("\"{$network['cdn']}\""); ?> ><?php echo (htmlspecialchars($network['title'])); ?></option>
+				<?php endforeach; ?>
+				</select>
+              </td>
+            </tr>
+
             <tr valign="top">
               <th scope="row"><?php echo $bsa_lang->line('bsa_body_open'); ?></th>
               <td> 

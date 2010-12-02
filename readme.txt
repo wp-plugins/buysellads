@@ -3,7 +3,7 @@ Contributors: valendesigns
 Tags: bsa, buy sell ads, ads, ad, ad management, widget
 Requires at least: 2.8
 Tested up to: 3.0.1
-Stable tag: 1.2
+Stable tag: 1.2.2
 
 Official BuySellAds.com WordPress plugin.
 
@@ -38,6 +38,9 @@ I will modify the translation once people have used the plugin. I want to make s
 2. Widgets Menu
 
 == Changelog ==
+
+= 1.2.1 =
+* Attempt to regenerate plugin's zip files in WP.
 
 = 1.2 =
 * Added support for private labels

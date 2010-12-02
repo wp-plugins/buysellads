@@ -3,7 +3,7 @@
 Plugin Name: BuySellAds
 Plugin URI: http://buysellads.com/
 Description: Official BuySellAds.com WordPress plugin.
-Version: 1.1
+Version: 1.2.2
 Author: Derek Herman
 Author URI: http://valendesigns.com/
 License: GPL3

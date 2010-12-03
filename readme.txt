@@ -39,10 +39,7 @@ I will modify the translation once people have used the plugin. I want to make s
 
 == Changelog ==
 
-= 1.2.1 =
-* Attempt to regenerate plugin's zip files in WP.
-
-= 1.2 =
+= 2.0 =
 * Added support for private labels
 
 = 1.1 =
@@ -52,6 +49,9 @@ I will modify the translation once people have used the plugin. I want to make s
 * First Release 7/19/2010
 
 == Upgrade Notice ==
+
+= 2.0 =
+Cleaned up the repo UPGRADE if you downloaded any previous version
 
 = 1.1 =
 The backfill option has been removed. BuySellAds.com is implementing this feature server side and will no longer require a plugin.

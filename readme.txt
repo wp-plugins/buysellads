@@ -2,8 +2,8 @@
 Contributors: valendesigns
 Tags: bsa, buy sell ads, ads, ad, ad management, widget
 Requires at least: 2.8
-Tested up to: 3.0.1
-Stable tag: 1.2.4
+Tested up to: 3.0.2
+Stable tag: 2.0
 
 Official BuySellAds.com WordPress plugin.
 

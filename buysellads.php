@@ -72,3 +72,5 @@ $bsa_lang->load('admin');
 add_action( 'widgets_init', array( $bsa_plugin, 'widget_init' ) );
 add_action( 'admin_menu', array( $bsa_plugin, 'bsa_admin' ) );
 add_action( ( (get_option( 'bsa_body_open' ) == 1) ? 'wp_body_open' : 'wp_footer' ), 'embed_bsa_async_js' );
+add_filter('the_content_feed', 'bsa_rss_ads');
+add_filter('the_excerpt_rss', 'bsa_rss_ads');

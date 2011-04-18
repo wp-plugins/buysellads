@@ -93,13 +93,34 @@ class BSA_Plugin
       // Save posted values
       update_option( 'bsa_site_key', $bsa_site_key );
       update_option( 'bsa_body_open', $bsa_body_open );
+
+	  // The json configuration file
+	  $private_label_json = get_privatelabel_json();
       
       // new cdn
       $buysellads_cdn = $_POST['buysellads_cdn'];
-      $cdns = buysellads_cdns();
+	  $network = buysellads_network_for_cdn($private_label_json, $buysellads_cdn);
+      $cdns = buysellads_cdns($private_label_json);
       
       // Make sure the CDN is valid before saving it.
       update_option( 'buysellads_cdn' , (in_array($buysellads_cdn, $cdns) ? $buysellads_cdn : 's3.buysellads.com'));
+
+	  // RSS options
+	  $rss = buysellads_rss_urls($private_label_json);
+	  update_option('buysellads_rss', (isset($network['rss']) && in_array($network['rss'], $rss) ? $network['rss'] : 'rss.buysellads.com'));
+	
+      $bsa_rss_zone_top_id = $_POST['bsa_rss_zone_top_id'];
+      $bsa_rss_zone_top = $_POST['bsa_rss_zone_top'];
+      
+      update_option('bsa_rss_zone_top_id', $bsa_rss_zone_top_id);
+      update_option('bsa_rss_zone_top', $bsa_rss_zone_top);
+
+      $bsa_rss_zone_bottom_id = $_POST['bsa_rss_zone_bottom_id'];
+      $bsa_rss_zone_bottom = $_POST['bsa_rss_zone_bottom'];
+      
+      update_option('bsa_rss_zone_bottom_id', $bsa_rss_zone_bottom_id);
+      update_option('bsa_rss_zone_bottom', $bsa_rss_zone_bottom);
+      
       
       $json_data = get_buysellads_json();
       if ($json_data)
@@ -135,12 +156,47 @@ class BSA_Plugin
               </th>
               <td>
                 <select  id="bsa_network" name="buysellads_cdn">
-                <?php foreach(get_privatelabel_json() as $network): ?>
+				<?php $networks = get_privatelabel_json(); ?>
+                <?php foreach($networks as $network): ?>
                   <option <?php echo(stripos($network['cdn'], get_option('buysellads_cdn', 's3.buysellads.com')) === false ? '' : 'selected'); ?> value=<?php echo("\"{$network['cdn']}\""); ?> ><?php echo (htmlspecialchars($network['title'])); ?></option>
                 <?php endforeach; ?>
                 </select>
               </td>
             </tr>
+            <tr valign="top">
+            	<th scope="row"><label for="bsa_rss_zone_top"><?php echo $bsa_lang->line('rss_zone'); ?></label></th>
+            	<td> 
+                  	<input type="checkbox" value="1" id="bsa_rss_zone_top" name="bsa_rss_zone_top"<?php echo (get_option('bsa_rss_zone_top') == 1) ? ' checked="checked"': ''; ?>> Insert Ads in header of Feed
+                	<p><span class="description"><?php echo $bsa_lang->line('bsa_rss_zone_top_desc'); ?></span></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row">
+				  <label for="bsa_rss_zone_top_id"><?php echo $bsa_lang->line('bsa_rss_zone_top_id'); ?></label>
+				</th>
+				<td>
+				  <input type="text" class="regular-text" value="<?php echo get_option('bsa_rss_zone_top_id'); ?>" id="bsa_rss_zone_top_id" name="bsa_rss_zone_top_id">
+				  <span class="description"><?php echo $bsa_lang->line('bsa_rss_zone_top_id_desc'); ?></span>
+				</td>
+            </td>
+            </tr>
+			  <tr valign="top">
+	            	<th scope="row"><label for="bsa_rss_zone_bottom"></label></th>
+	            	<td> 
+	                  	<input type="checkbox" value="1" id="bsa_rss_zone_bottom" name="bsa_rss_zone_bottom"<?php echo (get_option('bsa_rss_zone_bottom') == 1) ? ' checked="checked"': ''; ?>> Insert Ads in footer of Feed
+	                	<p><span class="description"><?php echo $bsa_lang->line('bsa_rss_zone_bottom_desc'); ?></span></p>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+					  <label for="bsa_rss_zone_bottom_id"><?php echo $bsa_lang->line('bsa_rss_zone_bottom_id'); ?></label>
+					</th>
+					<td>
+					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_rss_zone_bottom_id'); ?>" id="bsa_rss_zone_bottom_id" name="bsa_rss_zone_bottom_id">
+					  <span class="description"><?php echo $bsa_lang->line('bsa_rss_zone_bottom_id_desc'); ?></span>
+					</td>
+	            </td>
+	            </tr>
             <tr valign="top">
               <th scope="row"><?php echo $bsa_lang->line('bsa_body_open'); ?></th>
               <td> 

@@ -163,9 +163,9 @@ class BSA_Plugin
               </th>
               <td>
                 <select  id="bsa_network" name="buysellads_cdn">
-				<?php $networks = get_privatelabel_json(); ?>
-                <?php foreach($networks as $network): ?>
-                  <option <?php echo(stripos($network['cdn'], get_option('buysellads_cdn', 's3.buysellads.com')) === false ? '' : 'selected'); ?> value=<?php echo("\"{$network['cdn']}\""); ?> ><?php echo (htmlspecialchars($network['title'])); ?></option>
+				<?php $private_labels = get_privatelabel_json();?>
+                <?php foreach($private_labels as $private_label): ?>
+                  <option <?php echo(stripos($private_label['cdn'], get_option('buysellads_cdn', 's3.buysellads.com')) === false ? '' : 'selected'); ?> value=<?php echo("\"{$private_label['cdn']}\""); ?> ><?php echo (htmlspecialchars($private_label['title'])); ?></option>
                 <?php endforeach; ?>
                 </select>
               </td>

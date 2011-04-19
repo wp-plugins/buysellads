@@ -262,7 +262,7 @@ if (!function_exists('buysellads_cdns_helper'))
 /**
  * Helper function to filter the RSS urls
  *
- * @since 2.0
+ * @since 2.2
  *
  * @return String
  */
@@ -277,7 +277,7 @@ if (!function_exists('buysellads_rss_helper'))
 /**
  * Helper function to filter the shortnames
  *
- * @since 2.0
+ * @since 2.2
  *
  * @return String
  */
@@ -292,7 +292,7 @@ if (!function_exists('buysellads_shortnames_helper'))
 /**
  * Helper function to filter the homepage
  *
- * @since 2.0
+ * @since 2.2
  *
  * @return String
  */
@@ -328,7 +328,7 @@ if (!function_exists('buysellads_network_for_cdn'))
 
 /**
 *	Returns a string without the bsa prefix.
-*	@since 2.0
+*	@since 2.2
 *	@uses strpos
 *	@uses strlen
 *	@uses substr
@@ -350,7 +350,7 @@ if (!function_exists('cleanBSAJsonString'))
 
 /**
 *	Adds the BSA ads to the top or bottom of each item in the RSS feed
-*	@since 2.0
+*	@since 2.2
 *	@param $content The content of the feed
 *	@return The content string
 */
@@ -370,7 +370,7 @@ if (!function_exists('bsa_rss_ads'))
 
 /**
 *	Returns an ad suitable for placement at the top of an RSS feed item
-*	@since 2.0
+*	@since 2.2
 *	@param $article The article for the ad
 *	@return String
 */
@@ -386,7 +386,7 @@ if (!function_exists('bsa_rss_ad_on_top'))
 
 /**
 *	Returns an ad suitable for placement at the bottom of an RSS feed item
-*	@since 2.0
+*	@since 2.2
 *	@param $article The article for the ad
 *	@return String
 */
@@ -402,7 +402,7 @@ if (!function_exists('bsa_rss_ad_on_bottom'))
 
 /**
 *	Returns an ad suitable for placement in a RSS feed
-*	@since 2.0
+*	@since 2.2
 *	@param $zone The zone for the ad
 *	@param $site The sitekey for the ad
 *	@param $article The unique article id

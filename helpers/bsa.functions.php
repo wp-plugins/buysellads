@@ -42,8 +42,7 @@ if (!function_exists('get_contents'))
 		
 		// If file_get_contents fails
 		// This can happen if allow_url_fopen is disabled
-		$data = ($data !== false ? $data : curl_get_contents($address));
-		return $data;
+		return ($data !== false ? $data : curl_get_contents($address));;
 	}
 }
 
@@ -158,7 +157,7 @@ if (!function_exists('get_buysellads_json'))
       if ($json_contents) 
       {
         // Decode & return json data
-        return json_decode(substr( $json_contents, 21, -2), true);
+        return json_decode(cleanBSAJsonString($json_contents), true);
       }
     }
   }
@@ -181,7 +180,7 @@ if (!function_exists('get_privatelabel_json'))
     $json = json_decode($json_contents, true);
 		
     // If @file_get_contents($json_url) returns true
-    return $json_contents  && isset($json['networks']) ? $json['networks'] : array(array("title"=>"BuySellAds.com","cdn"=>"s3.buysellads.com"));
+    return $json_contents  && isset($json['networks']) ? $json['networks'] : array(array("title"=>"BuySellAds.com","cdn"=>"s3.buysellads.com", "rss" => "rss.buysellads.com", "homepage" => "http://buysellads.com", "shortname" => "BSA"));
   }
 }
 
@@ -189,17 +188,60 @@ if (!function_exists('get_privatelabel_json'))
  * Returns an array of CDNs for the private labels
  *
  * @since 2.0
- * @uses get_privatelabel_json()
- *
+ * @param $json The json configuration to parse
  * @return Array
  */
 if (!function_exists('buysellads_cdns'))
 {
-  function buysellads_cdns()
+  function buysellads_cdns($json)
   {
-    $json = get_privatelabel_json();
     return array_map('buysellads_cdns_helper', $json);
   }
+}
+
+/**
+ * Returns an array of RSS urls for the private labels
+ *
+ * @since 2.0
+ * @param $json The json configuration to parse
+ * @return Array
+ */
+if (!function_exists('buysellads_rss_urls'))
+{
+  function buysellads_rss_urls($json)
+  {
+    return array_map('buysellads_rss_helper', $json);
+  }
+}
+
+/**
+ * Returns an array of shortnames for the private labels
+ *
+ * @since 2.0
+ * @param $json The json configuration to parse
+ * @return Array
+ */
+if (!function_exists('buysellads_shortnames'))
+{
+	function buysellads_shortnames($json)
+	{
+		return array_map('buysellads_shortnames_helper', $json);
+	}
+}
+
+/**
+ * Returns an array of homepages for the private labels
+ *
+ * @since 2.0
+ * @param $json The json configuration to parse
+ * @return Array
+ */
+if (!function_exists('buysellads_homepages'))
+{
+	function buysellads_homepages($json)
+	{
+		return array_map('buysellads_homepages_helper', $json);
+	}
 }
 
 /**
@@ -216,3 +258,167 @@ if (!function_exists('buysellads_cdns_helper'))
     return $network['cdn'];
   }
 }
+
+/**
+ * Helper function to filter the RSS urls
+ *
+ * @since 2.2
+ *
+ * @return String
+ */
+if (!function_exists('buysellads_rss_helper'))
+{
+  function buysellads_rss_helper($network)
+  {
+    return $network['rss'];
+  }
+}
+
+/**
+ * Helper function to filter the shortnames
+ *
+ * @since 2.2
+ *
+ * @return String
+ */
+if (!function_exists('buysellads_shortnames_helper'))
+{
+  function buysellads_shortnames_helper($network)
+  {
+    return $network['shortname'];
+  }
+}
+
+/**
+ * Helper function to filter the homepage
+ *
+ * @since 2.2
+ *
+ * @return String
+ */
+if (!function_exists('buysellads_homepages_helper'))
+{
+  function buysellads_homepages_helper($network)
+  {
+    return $network['homepage'];
+  }
+}
+
+/**
+ * Get the network for the specified CDN
+ *
+ * @since 2.0
+ * @param $networks An array of networks to search
+ * @param $cdn The cdn to search for
+ * @param Associative array
+ */
+if (!function_exists('buysellads_network_for_cdn'))
+{
+	function buysellads_network_for_cdn($networks, $cdn)
+	{
+		foreach ($networks as $network)
+		{
+			if (stripos($network['cdn'], $cdn) !== false)
+				return $network;
+		}
+		
+		return array();
+	}
+}
+
+/**
+*	Returns a string without the bsa prefix.
+*	@since 2.2
+*	@uses strpos
+*	@uses strlen
+*	@uses substr
+*	@param $json A JSON string to clean
+*	@return String.
+*/
+if (!function_exists('cleanBSAJsonString'))
+{
+	function cleanBSAJsonString($json = '')
+	{
+		$prefix = '_bsap.interpret_json(';
+		if (strpos($json, $prefix) === false)
+			return $json;
+	
+		$l = strlen($prefix);
+		return substr($json, $l, strlen($json)-$l-2);
+	}
+}
+
+/**
+*	Adds the BSA ads to the top or bottom of each item in the RSS feed
+*	@since 2.2
+*	@param $content The content of the feed
+*	@return The content string
+*/
+if (!function_exists('bsa_rss_ads'))
+{
+	function bsa_rss_ads($content)
+	{
+		$article = get_the_ID();
+		if (get_option('bsa_rss_zone_top') == 1)
+			$content = bsa_rss_ad_on_top($article).$content;
+		if (get_option('bsa_rss_zone_bottom') == 1)
+			$content .= bsa_rss_ad_on_bottom($article);
+		
+		return $content;
+	}
+}
+
+/**
+*	Returns an ad suitable for placement at the top of an RSS feed item
+*	@since 2.2
+*	@param $article The article for the ad
+*	@return String
+*/
+if (!function_exists('bsa_rss_ad_on_top'))
+{
+	function bsa_rss_ad_on_top($article)
+	{
+		$zone = get_option('bsa_rss_zone_top_id');
+		$site = get_option('bsa_site_key');
+		return (empty($zone) || empty($site)) ? '' : bsa_rss_ad($zone, $site, $article).'<br />';
+	}
+}
+
+/**
+*	Returns an ad suitable for placement at the bottom of an RSS feed item
+*	@since 2.2
+*	@param $article The article for the ad
+*	@return String
+*/
+if (!function_exists('bsa_rss_ad_on_bottom'))
+{
+	function bsa_rss_ad_on_bottom($article)
+	{
+		$zone = get_option('bsa_rss_zone_bottom_id');
+		$site = get_option('bsa_site_key');
+		return (empty($zone) || empty($site)) ? '' : '<br />'.bsa_rss_ad($zone, $site, $article);
+	}
+}
+
+/**
+*	Returns an ad suitable for placement in a RSS feed
+*	@since 2.2
+*	@param $zone The zone for the ad
+*	@param $site The sitekey for the ad
+*	@param $article The unique article id
+*	@return String.
+*/
+if (!function_exists('bsa_rss_ad'))
+{
+	function bsa_rss_ad($zone, $site, $article)
+	{
+		$random = rand();
+		$rss = get_option('buysellads_rss', 'rss.buysellads.com');
+		$network = get_option('buysellads_shortname', 'BSA');
+		$home = rtrim(get_option('buysellads_homepage', 'buysellads.com'), '/');
+		
+		return "<a href='http://${rss}/click.php?z=${zone}&k=${site}&a=${article}&c=${random}' target='_blank'><img src='http://${rss}/img.php?z=${zone}&k=${site}&a=${article}&c=${random}' border='0' alt='' /></a><p><a href='http://${home}/buy/sitedetails/pubkey/${site}/zone/${zone}' target='_blank'>Advertise here with ${network}</a></p>";
+	}
+}
+
+?>

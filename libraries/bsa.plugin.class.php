@@ -120,7 +120,14 @@ class BSA_Plugin
       
       update_option('bsa_rss_zone_bottom_id', $bsa_rss_zone_bottom_id);
       update_option('bsa_rss_zone_bottom', $bsa_rss_zone_bottom);
-      
+
+	  // Shortname
+	  $shortnames = buysellads_shortnames($private_label_json);
+	  update_option('bsa_shortname', (isset($network['shortname']) && in_array($network['shortname'], $shortnames) ? $network['shortname'] : 'BSA'));
+	
+	  // Homepage
+      $homepages = buysellads_homepages($private_label_json);
+	  update_option('bsa_homepage', (isset($network['homepage']) && in_array($network['homepage'], $homepages) ? $network['homepage'] : 'buysellads.com'));
       
       $json_data = get_buysellads_json();
       if ($json_data)

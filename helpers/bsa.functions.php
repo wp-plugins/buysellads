@@ -59,6 +59,7 @@ if (!function_exists('embed_bsa_async_js'))
   {
     if (!is_admin()) { 
 	  $cdn = get_option( 'buysellads_cdn', 's3.buysellads.com');
+	  $src = get_option('buysellads_src', 'ac/bsa.js');
       printf("
         <!-- BuySellAds.com Ad Code -->
         <script type=\"text/javascript\">
@@ -66,7 +67,7 @@ if (!function_exists('embed_bsa_async_js'))
           var bsa = document.createElement('script');
               bsa.type= 'text/javascript';
               bsa.async = true;
-              bsa.src='//{$cdn}/ac/bsa.js';
+              bsa.src='//{$cdn}/{$src}';
           (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
         })();
         </script>
@@ -200,6 +201,21 @@ if (!function_exists('buysellads_cdns'))
 }
 
 /**
+ * Returns an array of SRC attributes for the private labels
+ *
+ * @since 2.1
+ * @param $json The json configuration to parse
+ * @return Array
+ */
+if (!function_exists('buysellads_srcs'))
+{
+	function buysellads_srcs($json)
+	{
+		return array_map('buysellads_src_helper', $json);
+	}
+}
+
+/**
  * Returns an array of RSS urls for the private labels
  *
  * @since 2.0
@@ -256,6 +272,21 @@ if (!function_exists('buysellads_cdns_helper'))
   function buysellads_cdns_helper($network)
   {
     return $network['cdn'];
+  }
+}
+
+/**
+ * Helper function to filter the src
+ *
+ * @since 2.0
+ *
+ * @return String
+ */
+if (!function_exists('buysellads_src_helper'))
+{
+  function buysellads_src_helper($network)
+  {
+    return $network['src'];
   }
 }
 

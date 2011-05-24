@@ -1,9 +1,9 @@
 === BuySellAds ===
-Contributors: valendesigns
-Tags: bsa, buy sell ads, ads, ad, ad management, widget
+Contributors: valendesigns, barchard
+Tags: bsa, buy sell ads, ads, ad, ad management, widget, buysellads
 Requires at least: 2.8
 Tested up to: 3.0.2
-Stable tag: 2.1.1
+Stable tag: 2.2.3
 
 Official BuySellAds.com WordPress plugin.
 
@@ -38,6 +38,19 @@ I will modify the translation once people have used the plugin. I want to make s
 2. Widgets Menu
 
 == Changelog ==
+
+= 2.2.3 =
+* Corrected network name for private labels in RSS ads.
+
+= 2.2.2 =
+* Corrected an issue with javascript includes for private labels.
+
+= 2.2.1 =
+* Added a <p> wrapper around RSS ad image.
+
+= 2.2.0 =
+* RSS Ads. Add the ability to render ads at the top or bottom of a RSS feed item.
+* Abstracted features for private labels.
 
 = 2.1.1 =
 * If file_get_contents fails, we now fall back to curl to try to get the javascript ad code.

@@ -452,4 +452,98 @@ if (!function_exists('bsa_rss_ad'))
 	}
 }
 
+
+
+/**
+*	Adds the BSA ads to the top or bottom of each item in the RSS feed
+*	@since 2.2
+*	@param $content The content of the feed
+*	@return The content string
+*/
+if (!function_exists('bsa_mobile_ads'))
+{
+	function bsa_mobile_ads($content)
+	{
+		if (!bsa_mobile_browser())
+			return $content;
+		
+		$article = get_the_ID();
+		if (get_option('bsa_mobile_zone_top') == 1)
+			$content = bsa_mobile_ad_on_top($article).$content;
+		if (get_option('bsa_mobile_zone_bottom') == 1)
+			$content .= bsa_mobile_ad_on_bottom($article);
+		
+		return $content;
+	}
+}
+
+/**
+*	Returns an ad suitable for placement at the top of an RSS feed item
+*	@since 2.2
+*	@param $article The article for the ad
+*	@return String
+*/
+if (!function_exists('bsa_mobile_ad_on_top'))
+{
+	function bsa_mobile_ad_on_top($article)
+	{
+		$zone = get_option('bsa_mobile_zone_top_id');
+		$site = get_option('bsa_site_key');
+		return (empty($zone) || empty($site)) ? '' : bsa_zone_code($zone, $site, $article).'<div style="clear: both; display: block;"></div>';
+	}
+}
+
+/**
+*	Returns an ad suitable for placement at the bottom of an RSS feed item
+*	@since 2.2
+*	@param $article The article for the ad
+*	@return String
+*/
+if (!function_exists('bsa_mobile_ad_on_bottom'))
+{
+	function bsa_mobile_ad_on_bottom($article)
+	{
+		$zone = get_option('bsa_mobile_zone_bottom_id');
+		$site = get_option('bsa_site_key');
+		return (empty($zone) || empty($site)) ? '' : '<div style="clear: both; display: block;"></div>'.bsa_zone_code($zone, $site, $article);
+	}
+}
+
+/**
+*	Returns the BSA zone code
+*	@since 2.3
+*	@param $zone The zone for the ad
+*	@param $site The sitekey for the ad
+*	@param $article The unique article id
+*	@return String.
+*/
+if (!function_exists('bsa_zone_code'))
+{
+	function bsa_zone_code($zone, $site, $article)
+	{	
+		return 	"<!-- BuySellAds.com Zone Code -->
+	        <div id=\"bsap_{$zone}\" class=\"bsarocks bsap_{$site}\"></div>
+	        <!-- END BuySellAds.com Zone Code -->";
+	}
+}
+
+	
+
+/**
+*	Returns true if the user is on a Mobile browser
+*	@since 2.3
+*	@return bool
+*/
+if (!function_exists('bsa_mobile_broswer'))
+{
+	function bsa_mobile_browser()
+	{
+		$agent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+		return (stripos($agent, 'iphone') !== false ||
+				stripos($agent, 'ipod') !== false ||
+				stripos($agent, 'ipad') !== false ||
+				stripos($agent, 'andriod') !== false);
+	}
+}
+
 ?>

@@ -121,6 +121,19 @@ class BSA_Plugin
       update_option('bsa_rss_zone_bottom_id', $bsa_rss_zone_bottom_id);
       update_option('bsa_rss_zone_bottom', $bsa_rss_zone_bottom);
 
+	  // Mobile settings
+	  $bsa_mobile_zone_top_id = $_POST['bsa_mobile_zone_top_id'];
+      $bsa_mobile_zone_top = $_POST['bsa_mobile_zone_top'];
+     
+      update_option('bsa_mobile_zone_top_id', $bsa_mobile_zone_top_id);
+      update_option('bsa_mobile_zone_top', $bsa_mobile_zone_top);
+
+      $bsa_mobile_zone_bottom_id = $_POST['bsa_mobile_zone_bottom_id'];
+      $bsa_mobile_zone_bottom = $_POST['bsa_mobile_zone_bottom'];
+     
+      update_option('bsa_mobile_zone_bottom_id', $bsa_mobile_zone_bottom_id);
+      update_option('bsa_mobile_zone_bottom', $bsa_mobile_zone_bottom);
+
 	  // Javascript src
 	  $srcs = buysellads_srcs($private_label_json);
 	  update_option('buysellads_src', (isset($network['src']) && in_array($network['src'], $srcs) ? trim($network['src'], '/') : 'ac/bsa.js'));
@@ -208,6 +221,42 @@ class BSA_Plugin
 					</td>
 	            </td>
 	            </tr>
+
+	            <tr valign="top">
+	            	<th scope="row"><label for="bsa_mobile_zone_top"><?php echo $bsa_lang->line('mobile_zone'); ?></label></th>
+	            	<td> 
+	                  	<input type="checkbox" value="1" id="bsa_mobile_zone_top" name="bsa_mobile_zone_top"<?php echo (get_option('bsa_mobile_zone_top') == 1) ? ' checked="checked"': ''; ?>> Insert Mobile Ads in top of Posts
+	                	<p><span class="description"><?php echo $bsa_lang->line('bsa_mobile_zone_top_desc'); ?></span></p>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+					  <label for="bsa_mobile_zone_top_id"><?php echo $bsa_lang->line('bsa_mobile_zone_top_id'); ?></label>
+					</th>
+					<td>
+					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_mobile_zone_top_id'); ?>" id="bsa_mobile_zone_top_id" name="bsa_mobile_zone_top_id">
+					  <span class="description"><?php echo $bsa_lang->line('bsa_mobile_zone_top_id_desc'); ?></span>
+					</td>
+	            </td>
+	        </tr>
+			<tr valign="top">
+	            	<th scope="row"><label for="bsa_mobile_zone_bottom"></label></th>
+	            	<td> 
+	                  	<input type="checkbox" value="1" id="bsa_mobile_zone_bottom" name="bsa_mobile_zone_bottom"<?php echo (get_option('bsa_mobile_zone_bottom') == 1) ? ' checked="checked"': ''; ?>> Insert Mobile Ads in bottom of Posts
+	                	<p><span class="description"><?php echo $bsa_lang->line('bsa_mobile_zone_bottom_desc'); ?></span></p>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+					  <label for="bsa_mobile_zone_bottom_id"><?php echo $bsa_lang->line('bsa_mobile_zone_bottom_id'); ?></label>
+					</th>
+					<td>
+					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_mobile_zone_bottom_id'); ?>" id="bsa_mobile_zone_bottom_id" name="bsa_mobile_zone_bottom_id">
+					  <span class="description"><?php echo $bsa_lang->line('bsa_mobile_zone_bottom_id_desc'); ?></span>
+					</td>
+	            </td>
+	            </tr>
+	
             <tr valign="top">
               <th scope="row"><?php echo $bsa_lang->line('bsa_body_open'); ?></th>
               <td> 
@@ -220,6 +269,8 @@ class BSA_Plugin
                 </fieldset>
               </td>
             </tr>
+
+
           </tbody>
         </table>
         <?php 

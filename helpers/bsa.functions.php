@@ -447,12 +447,13 @@ if (!function_exists('bsa_rss_ad'))
 		$rss = get_option('buysellads_rss', 'rss.buysellads.com');
 		$network = get_option('bsa_shortname', 'BSA');
 		$home = rtrim(get_option('bsa_homepage', 'buysellads.com'), '/');
+		$promote = get_option('bsa_advertise_here', true);
 		
-		return "<p><a href='http://${rss}/click.php?z=${zone}&k=${site}&a=${article}&c=${random}' target='_blank'><img src='http://${rss}/img.php?z=${zone}&k=${site}&a=${article}&c=${random}' border='0' alt='' /></a></p><p><a href='http://${home}/buy/sitedetails/pubkey/${site}/zone/${zone}' target='_blank'>Advertise here with ${network}</a></p>";
+		return "<p><a href='http://${rss}/click.php?z=${zone}&k=${site}&a=${article}&c=${random}' target='_blank'>
+				<img src='http://${rss}/img.php?z=${zone}&k=${site}&a=${article}&c=${random}' border='0' alt='' /></a></p>".
+				($promote ? "<p><a href='http://${home}/buy/sitedetails/pubkey/${site}/zone/${zone}' target='_blank'>Advertise here with ${network}</a></p>" : '');
 	}
 }
-
-
 
 /**
 *	Adds the BSA ads to the top or bottom of each item in the RSS feed

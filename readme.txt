@@ -3,7 +3,7 @@ Contributors: valendesigns, barchard
 Tags: bsa, buy sell ads, ads, ad, ad management, widget, buysellads
 Requires at least: 2.8
 Tested up to: 3.1.3
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 
 Official BuySellAds.com WordPress plugin.
 
@@ -38,6 +38,9 @@ I will modify the translation once people have used the plugin. I want to make s
 2. Widgets Menu
 
 == Changelog ==
+
+= 2.3.1 =
+* Fix default homepage value if configuration file isn't reachable.
 
 = 2.3.0 =
 * Add the ability to detect and display specific ads in Posts for iPhones, iPads, iPods or Andriod devices.

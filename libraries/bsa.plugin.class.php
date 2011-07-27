@@ -121,6 +121,8 @@ class BSA_Plugin
       update_option('bsa_rss_zone_bottom_id', $bsa_rss_zone_bottom_id);
       update_option('bsa_rss_zone_bottom', $bsa_rss_zone_bottom);
 
+	  update_option('bsa_advertise_here', isset($_POST['bsa_advertise_here']) ? $_POST['bsa_advertise_here'] : false);
+
 	  // Mobile settings
 	  $bsa_mobile_zone_top_id = $_POST['bsa_mobile_zone_top_id'];
       $bsa_mobile_zone_top = $_POST['bsa_mobile_zone_top'];
@@ -202,9 +204,10 @@ class BSA_Plugin
 				  <input type="text" class="regular-text" value="<?php echo get_option('bsa_rss_zone_top_id'); ?>" id="bsa_rss_zone_top_id" name="bsa_rss_zone_top_id">
 				  <span class="description"><?php echo $bsa_lang->line('bsa_rss_zone_top_id_desc'); ?></span>
 				</td>
-            </td>
             </tr>
-			  <tr valign="top">
+            
+			<tr valign="top">
+				<tr>
 	            	<th scope="row"><label for="bsa_rss_zone_bottom"></label></th>
 	            	<td> 
 	                  	<input type="checkbox" value="1" id="bsa_rss_zone_bottom" name="bsa_rss_zone_bottom"<?php echo (get_option('bsa_rss_zone_bottom') == 1) ? ' checked="checked"': ''; ?>> Insert Ads in footer of Feed
@@ -219,10 +222,20 @@ class BSA_Plugin
 					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_rss_zone_bottom_id'); ?>" id="bsa_rss_zone_bottom_id" name="bsa_rss_zone_bottom_id">
 					  <span class="description"><?php echo $bsa_lang->line('bsa_rss_zone_bottom_id_desc'); ?></span>
 					</td>
-	            </td>
 	            </tr>
-
-	            <tr valign="top">
+	         </tr>
+			<tr valign="top">
+				<tr>
+	            	<th scope="row"><label for="bsa_advertise_here"></label></th>
+	            	<td> 
+	                  	<input type="checkbox" value="1" id="bsa_advertise_here" name="bsa_advertise_here"<?php echo (get_option('bsa_advertise_here') == 1) ? ' checked="checked"': ''; ?>> Insert Advertise Here text in Feed
+	                	<p><span class="description"><?php echo $bsa_lang->line('bsa_advertise_here_desc'); ?></span></p>
+					</td>
+				</tr>
+	        </tr>
+			
+	        <tr valign="top">
+				<tr>
 	            	<th scope="row"><label for="bsa_mobile_zone_top"><?php echo $bsa_lang->line('mobile_zone'); ?></label></th>
 	            	<td> 
 	                  	<input type="checkbox" value="1" id="bsa_mobile_zone_top" name="bsa_mobile_zone_top"<?php echo (get_option('bsa_mobile_zone_top') == 1) ? ' checked="checked"': ''; ?>> Insert Mobile Ads in top of Posts
@@ -237,9 +250,10 @@ class BSA_Plugin
 					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_mobile_zone_top_id'); ?>" id="bsa_mobile_zone_top_id" name="bsa_mobile_zone_top_id">
 					  <span class="description"><?php echo $bsa_lang->line('bsa_mobile_zone_top_id_desc'); ?></span>
 					</td>
-	            </td>
+	            </tr>
 	        </tr>
 			<tr valign="top">
+				<tr>
 	            	<th scope="row"><label for="bsa_mobile_zone_bottom"></label></th>
 	            	<td> 
 	                  	<input type="checkbox" value="1" id="bsa_mobile_zone_bottom" name="bsa_mobile_zone_bottom"<?php echo (get_option('bsa_mobile_zone_bottom') == 1) ? ' checked="checked"': ''; ?>> Insert Mobile Ads in bottom of Posts
@@ -254,8 +268,8 @@ class BSA_Plugin
 					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_mobile_zone_bottom_id'); ?>" id="bsa_mobile_zone_bottom_id" name="bsa_mobile_zone_bottom_id">
 					  <span class="description"><?php echo $bsa_lang->line('bsa_mobile_zone_bottom_id_desc'); ?></span>
 					</td>
-	            </td>
 	            </tr>
+	        </tr>
 	
             <tr valign="top">
               <th scope="row"><?php echo $bsa_lang->line('bsa_body_open'); ?></th>

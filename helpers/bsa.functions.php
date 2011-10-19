@@ -444,9 +444,9 @@ if (!function_exists('bsa_rss_ad'))
 	function bsa_rss_ad($zone, $site, $article)
 	{
 		$random = rand();
-		$rss = trim('http://', get_option('buysellads_rss', 'rss.buysellads.com'));
+		$rss = get_option('buysellads_rss', 'rss.buysellads.com');
 		$network = get_option('bsa_shortname', 'BSA');
-		$home = trim('http://', rtrim(get_option('bsa_homepage', 'buysellads.com'), '/'));
+		$home = get_option('bsa_homepage', 'buysellads.com');
 		$promote = get_option('bsa_advertise_here', false);
 		
 		return "<p><a href='http://${rss}/click.php?z=${zone}&k=${site}&a=${article}&c=${random}' target='_blank' rel='nofollow'>

@@ -40,6 +40,7 @@ I will modify the translation once people have used the plugin. I want to make s
 == Changelog ==
 
 = 2.3.2 =
+* Remove an unnecessary trim call
 * Add rel='nofollow' to RSS links
 
 = 2.3.1 =

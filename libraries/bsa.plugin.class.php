@@ -80,6 +80,11 @@ class BSA_Plugin
   function bsa_admin_settings()
   {
     global $bsa_lang;
+
+	if (!current_user_can('activate_plugins'))
+	{
+		wp_die(__('You do not have sufficient permissions to access this page.'));
+	}
     
     if( isset($_POST[ 'option_values' ]) && $_POST[ 'option_values' ] == 'save' ) 
     {

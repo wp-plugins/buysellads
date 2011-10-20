@@ -40,6 +40,7 @@ I will modify the translation once people have used the plugin. I want to make s
 == Changelog ==
 
 = 2.3.2 =
+* Only allow Admin level users or greater to view and edit the plugin settings
 * Remove an unnecessary trim call
 * Add rel='nofollow' to RSS links
 

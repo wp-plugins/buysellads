@@ -42,7 +42,7 @@ if (!function_exists('get_contents'))
 		
 		// If file_get_contents fails
 		// This can happen if allow_url_fopen is disabled
-		return ($data !== false ? $data : curl_get_contents($address));;
+		return ($data !== false ? $data : curl_get_contents($address));
 	}
 }
 
@@ -449,6 +449,10 @@ if (!function_exists('bsa_rss_ad'))
 		$home = get_option('bsa_homepage', 'buysellads.com');
 		$promote = get_option('bsa_advertise_here', false);
 		
+		$zone = trim($zone);
+		$site = trim($site);
+		$article = trim($article);
+		
 		return "<p><a href='http://${rss}/click.php?z=${zone}&k=${site}&a=${article}&c=${random}' target='_blank' rel='nofollow'>
 				<img src='http://${rss}/img.php?z=${zone}&k=${site}&a=${article}&c=${random}' border='0' alt='' /></a></p>".
 				($promote ? "<p><a href='http://${home}/buy/sitedetails/pubkey/${site}/zone/${zone}' target='_blank'>Advertise here with ${network}</a></p>" : '');
@@ -521,7 +525,10 @@ if (!function_exists('bsa_mobile_ad_on_bottom'))
 if (!function_exists('bsa_zone_code'))
 {
 	function bsa_zone_code($zone, $site, $article)
-	{	
+	{
+		$zone = trim($zone);
+		$site = trim($site);
+		$article = trim($article);	
 		return 	"<!-- BuySellAds.com Zone Code -->
 	        <div id=\"bsap_{$zone}\" class=\"bsarocks bsap_{$site}\"></div>
 	        <!-- END BuySellAds.com Zone Code -->";

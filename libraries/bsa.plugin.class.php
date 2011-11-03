@@ -91,10 +91,10 @@ class BSA_Plugin
     if( isset($_POST[ 'option_values' ]) && $_POST[ 'option_values' ] == 'save' ) 
     {
       // Check Referer
-      check_admin_referer( 'buysellads_settings' );
+      check_admin_referer('buysellads_settings');
       
       // Read posted value
-      $bsa_site_key = $_POST[ 'bsa_site_key' ];
+      $bsa_site_key = trim($_POST['bsa_site_key']);
       $bsa_body_open = $_POST[ 'bsa_body_open' ];
       
       // Save posted values
@@ -116,13 +116,13 @@ class BSA_Plugin
 	  $rss = buysellads_rss_urls($private_label_json);
 	  update_option('buysellads_rss', (isset($network['rss']) && in_array($network['rss'], $rss) ? $network['rss'] : 'rss.buysellads.com'));
 	
-      $bsa_rss_zone_top_id = $_POST['bsa_rss_zone_top_id'];
+      $bsa_rss_zone_top_id = trim($_POST['bsa_rss_zone_top_id']);
       $bsa_rss_zone_top = $_POST['bsa_rss_zone_top'];
       
       update_option('bsa_rss_zone_top_id', $bsa_rss_zone_top_id);
       update_option('bsa_rss_zone_top', $bsa_rss_zone_top);
 
-      $bsa_rss_zone_bottom_id = $_POST['bsa_rss_zone_bottom_id'];
+      $bsa_rss_zone_bottom_id = trim($_POST['bsa_rss_zone_bottom_id']);
       $bsa_rss_zone_bottom = $_POST['bsa_rss_zone_bottom'];
       
       update_option('bsa_rss_zone_bottom_id', $bsa_rss_zone_bottom_id);
@@ -131,13 +131,13 @@ class BSA_Plugin
 	  update_option('bsa_advertise_here', isset($_POST['bsa_advertise_here']) ? $_POST['bsa_advertise_here'] : false);
 
 	  // Mobile settings
-	  $bsa_mobile_zone_top_id = $_POST['bsa_mobile_zone_top_id'];
+	  $bsa_mobile_zone_top_id = trim($_POST['bsa_mobile_zone_top_id']);
       $bsa_mobile_zone_top = $_POST['bsa_mobile_zone_top'];
      
       update_option('bsa_mobile_zone_top_id', $bsa_mobile_zone_top_id);
       update_option('bsa_mobile_zone_top', $bsa_mobile_zone_top);
 
-      $bsa_mobile_zone_bottom_id = $_POST['bsa_mobile_zone_bottom_id'];
+      $bsa_mobile_zone_bottom_id = trim($_POST['bsa_mobile_zone_bottom_id']);
       $bsa_mobile_zone_bottom = $_POST['bsa_mobile_zone_bottom'];
      
       update_option('bsa_mobile_zone_bottom_id', $bsa_mobile_zone_bottom_id);

@@ -27,6 +27,7 @@ $lang['bsa_rss_zone_top_desc'] = 'Enable Ads in the header of each RSS feed item
 $lang['bsa_rss_zone_top_id_desc'] = 'Enter the zone id for the ad zone that corresponds to the header of the RSS feed';
 $lang['bsa_rss_zone_bottom_desc'] = 'Enable Ads in the footer of each RSS feed item';
 $lang['bsa_rss_zone_bottom_id_desc'] = 'Enter the zone id for the ad zone that corresponds to the footer of the RSS feed';
+$lang['bsa_advertise_here_desc'] = 'Enter the Advertise Here text below the RSS Ad.';
 
 $lang['mobile_zone'] = 'Mobile';
 $lang['bsa_mobile_zone_bottom_desc'] = 'Enable mobile only ads on the bottom of posts.';

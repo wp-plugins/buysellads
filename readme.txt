@@ -2,8 +2,8 @@
 Contributors: valendesigns, barchard
 Tags: bsa, buy sell ads, ads, ad, ad management, widget, buysellads
 Requires at least: 2.8
-Tested up to: 3.0.2
-Stable tag: 2.2.3
+Tested up to: 3.1.3
+Stable tag: 2.3.3
 
 Official BuySellAds.com WordPress plugin.
 
@@ -38,6 +38,21 @@ I will modify the translation once people have used the plugin. I want to make s
 2. Widgets Menu
 
 == Changelog ==
+
+= 2.3.3 =
+* Prevent whitespace from making it's way into the site key or zoneid values.
+
+= 2.3.2 =
+* Only allow Admin level users or greater to view and edit the plugin settings
+* Remove an unnecessary trim call
+* Add rel='nofollow' to RSS links
+
+= 2.3.1 =
+* Fix default homepage value if configuration file isn't reachable.
+
+= 2.3.0 =
+* Add the ability to detect and display specific ads in Posts for iPhones, iPads, iPods or Andriod devices.
+* Add the ability to disable the 'Advertise Here' text in the RSS feed.
 
 = 2.2.3 =
 * Corrected network name for private labels in RSS ads.

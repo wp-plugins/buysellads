@@ -1,5 +1,5 @@
 === BuySellAds ===
-Contributors: valendesigns, barchard
+Contributors: barchard
 Tags: bsa, buy sell ads, ads, ad, ad management, widget, buysellads
 Requires at least: 2.8
 Tested up to: 3.1.3

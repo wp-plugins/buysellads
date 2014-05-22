@@ -95,11 +95,9 @@ class BSA_Plugin
       
       // Read posted value
       $bsa_site_key = trim($_POST['bsa_site_key']);
-      $bsa_body_open = $_POST[ 'bsa_body_open' ];
       
       // Save posted values
       update_option( 'bsa_site_key', $bsa_site_key );
-      update_option( 'bsa_body_open', $bsa_body_open );
 
 	  // The json configuration file
 	  $private_label_json = get_privatelabel_json();
@@ -171,6 +169,8 @@ class BSA_Plugin
     ?>
     <div class="wrap" id="buysellads">
       <h2><?php echo $bsa_lang->line('plugin_title'); ?></h2>
+      <p><?php echo $bsa_lang->line('bsa_plugin_tutorial'); ?></p>
+      <p><?php echo $bsa_lang->line('bsa_dont_want_widgets'); ?></p>
       <form method="post" action="">
         <table class="form-table">
           <tbody>
@@ -179,7 +179,7 @@ class BSA_Plugin
                 <label for="bsa_site_key"><?php echo $bsa_lang->line('site_key'); ?></label>
               </th>
               <td>
-                <input type="text" class="regular-text" value="<?php echo get_option('bsa_site_key'); ?>" id="bsa_site_key" name="bsa_site_key">
+                <input type="text" class="regular-text" value="<?php echo esc_attr(get_option('bsa_site_key')); ?>" id="bsa_site_key" name="bsa_site_key">
                 <span class="description"><?php echo $bsa_lang->line('site_key_desc'); ?></span>
               </td>
             </tr>
@@ -191,7 +191,7 @@ class BSA_Plugin
                 <select  id="bsa_network" name="buysellads_cdn">
 				<?php $private_labels = get_privatelabel_json();?>
                 <?php foreach($private_labels as $private_label): ?>
-                  <option <?php echo(stripos($private_label['cdn'], get_option('buysellads_cdn', 's3.buysellads.com')) === false ? '' : 'selected'); ?> value=<?php echo("\"{$private_label['cdn']}\""); ?> ><?php echo (htmlspecialchars($private_label['title'])); ?></option>
+                  <option <?php echo(stripos($private_label['cdn'], get_option('buysellads_cdn', 's3.buysellads.com')) === false ? '' : 'selected'); ?> value=<?php echo("\"{$private_label['cdn']}\""); ?> ><?php echo (esc_html($private_label['title'])); ?></option>
                 <?php endforeach; ?>
                 </select>
               </td>
@@ -208,7 +208,7 @@ class BSA_Plugin
 				  <label for="bsa_rss_zone_top_id"><?php echo $bsa_lang->line('bsa_rss_zone_top_id'); ?></label>
 				</th>
 				<td>
-				  <input type="text" class="regular-text" value="<?php echo get_option('bsa_rss_zone_top_id'); ?>" id="bsa_rss_zone_top_id" name="bsa_rss_zone_top_id">
+				  <input type="text" class="regular-text" value="<?php echo esc_attr(get_option('bsa_rss_zone_top_id')); ?>" id="bsa_rss_zone_top_id" name="bsa_rss_zone_top_id">
 				  <span class="description"><?php echo $bsa_lang->line('bsa_rss_zone_top_id_desc'); ?></span>
 				</td>
             </tr>
@@ -226,7 +226,7 @@ class BSA_Plugin
 					  <label for="bsa_rss_zone_bottom_id"><?php echo $bsa_lang->line('bsa_rss_zone_bottom_id'); ?></label>
 					</th>
 					<td>
-					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_rss_zone_bottom_id'); ?>" id="bsa_rss_zone_bottom_id" name="bsa_rss_zone_bottom_id">
+					  <input type="text" class="regular-text" value="<?php echo esc_attr(get_option('bsa_rss_zone_bottom_id')); ?>" id="bsa_rss_zone_bottom_id" name="bsa_rss_zone_bottom_id">
 					  <span class="description"><?php echo $bsa_lang->line('bsa_rss_zone_bottom_id_desc'); ?></span>
 					</td>
 	            </tr>
@@ -254,7 +254,7 @@ class BSA_Plugin
 					  <label for="bsa_mobile_zone_top_id"><?php echo $bsa_lang->line('bsa_mobile_zone_top_id'); ?></label>
 					</th>
 					<td>
-					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_mobile_zone_top_id'); ?>" id="bsa_mobile_zone_top_id" name="bsa_mobile_zone_top_id">
+					  <input type="text" class="regular-text" value="<?php echo esc_attr(get_option('bsa_mobile_zone_top_id')); ?>" id="bsa_mobile_zone_top_id" name="bsa_mobile_zone_top_id">
 					  <span class="description"><?php echo $bsa_lang->line('bsa_mobile_zone_top_id_desc'); ?></span>
 					</td>
 	            </tr>
@@ -272,33 +272,18 @@ class BSA_Plugin
 					  <label for="bsa_mobile_zone_bottom_id"><?php echo $bsa_lang->line('bsa_mobile_zone_bottom_id'); ?></label>
 					</th>
 					<td>
-					  <input type="text" class="regular-text" value="<?php echo get_option('bsa_mobile_zone_bottom_id'); ?>" id="bsa_mobile_zone_bottom_id" name="bsa_mobile_zone_bottom_id">
+					  <input type="text" class="regular-text" value="<?php echo esc_attr(get_option('bsa_mobile_zone_bottom_id')); ?>" id="bsa_mobile_zone_bottom_id" name="bsa_mobile_zone_bottom_id">
 					  <span class="description"><?php echo $bsa_lang->line('bsa_mobile_zone_bottom_id_desc'); ?></span>
 					</td>
 	            </tr>
 	        </tr>
-	
-            <tr valign="top">
-              <th scope="row"><?php echo $bsa_lang->line('bsa_body_open'); ?></th>
-              <td> 
-                <fieldset>
-                  <legend class="screen-reader-text"><span><?php echo $bsa_lang->line('bsa_body_open'); ?></span></legend>
-                  <label for="bsa_body_open">
-                    <input type="checkbox" value="1" id="bsa_body_open" name="bsa_body_open"<?php echo (get_option('bsa_body_open') == 1) ? ' checked="checked"': ''; ?>> Use <strong>wp_body_open()</strong>
-                  </label>
-                  <p><span class="description"><?php echo $bsa_lang->line('bsa_body_open_desc'); ?></span></p>
-                </fieldset>
-              </td>
-            </tr>
-
-
           </tbody>
         </table>
         <?php 
         if ( function_exists( 'wp_nonce_field' ) && wp_nonce_field( 'buysellads_settings' ) ) {
           printf('
           <p class="submit">
-            <input type="submit" name="submit_settings" class="button-primary" value="Save Settings" />
+            <input type="submit" name="submit_settings" class="button-primary" value="%s" />
           </p>
           ',
           $bsa_lang->line('submit_settings')

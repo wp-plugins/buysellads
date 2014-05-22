@@ -14,10 +14,8 @@ $lang['widget_ad_zone'] = 'Ad Zone';
 $lang['settings_updated'] = 'Settings <strong>Updated</strong>.';
 $lang['settings_error'] = '<strong>Error</strong>! Your Site Key could not be verified.';
 $lang['site_key'] = 'Site Key';
-$lang['site_key_desc'] = 'Copy+paste your Site Key here. You can find this on the "install ad code" page.';
-$lang['empty_site_key'] = 'A Site key has not been added yet. <a href="%s">Add One</a>.';
-$lang['bsa_body_open'] = 'Asynchronous Code';
-$lang['bsa_body_open_desc'] = 'Directly after the opening <strong>&lt;body&gt;</strong> tag insert <strong>&lt;?php if (function_exists(\'wp_body_open\')) { wp_body_open(); } ?&gt;</strong>. Otherwise, the necessary code snippet will be inserted using <strong>&lt;?php wp_footer(); ?&gt;</strong>';
+$lang['site_key_desc'] = 'Copy and paste your Site Key here. On the Ad Code page, you will see a string of numbers and letters just after the "bsap_" part of the "Step 2" code. This is your site key.';
+$lang['empty_site_key'] = 'A Site Key has not been added yet. <a href="%s">Add One</a>.';
 $lang['submit_settings'] = 'Save Settings';
 $lang['network'] = 'Network';
 
@@ -38,3 +36,7 @@ $lang['bsa_mobile_zone_top_id_desc'] = '';
 $lang['bsa_mobile_zone_top_id'] = '';
 $lang['bsa_mobile_zone_top_id_desc'] = 'Enter the zone id for the ad zone that corresponds to the top of posts.';
 $lang['bsa_mobile_zone_bottom_id_desc'] = 'Enter the zone id for the ad zone that corresponds to the bottom of posts.';
+$lang['bsa_plugin_tutorial'] = 'For more detailed instructions, please view our <a href="http://support.buysellads.com/knowledge_base/topics/wordpress-plugin-tutorial" target="_blank">WordPress Plugin Tutorial</a>.';
+$lang['bsa_dont_want_widgets'] = 'If you don\'t want to use Widgets to display your zones, you can add the STEP 2 code from your Ad Code page in the specific location that you want each zone to appear.';
+
+

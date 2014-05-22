@@ -57,7 +57,7 @@ if (!function_exists('embed_bsa_async_js'))
 {
   function embed_bsa_async_js() 
   {
-    if (!is_admin()) { 
+    if (!is_admin()) {
 	  $cdn = get_option( 'buysellads_cdn', 's3.buysellads.com');
 	  $src = get_option('buysellads_src', 'ac/bsa.js');
       printf("
@@ -81,6 +81,7 @@ if (!function_exists('embed_bsa_async_js'))
  * Fire the wp_body_open action
  *
  * @since 1.0
+ * @deprecated 2.3.4
  * @uses do_action() Calls 'wp_body_open' hook.
  *
  * @return void
@@ -550,7 +551,7 @@ if (!function_exists('bsa_mobile_broswer'))
 		return (stripos($agent, 'iphone') !== false ||
 				stripos($agent, 'ipod') !== false ||
 				stripos($agent, 'ipad') !== false ||
-				stripos($agent, 'andriod') !== false);
+				stripos($agent, 'android') !== false);
 	}
 }
 

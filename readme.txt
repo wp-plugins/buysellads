@@ -2,26 +2,22 @@
 Contributors: barchard
 Tags: bsa, buy sell ads, ads, ad, ad management, widget, buysellads
 Requires at least: 2.8
-Tested up to: 3.9
-Stable tag: 2.3.3
+Tested up to: 3.9.1
+Stable tag: 2.3.4
 
 Official BuySellAds.com WordPress plugin.
 
 == Description ==
 
-This official BuySellAds.com WordPress plugin gives you two extremely simple ways to insert your BSA code. You have the option to use Widgets or manually insert a single function that returns your desired Ad Zone.
+This official BuySellAds.com WordPress plugin gives you simple ways to insert your BSA ad code, including BSA Widgets and RSS/mobile advertisements.
 
 == Installation ==
 
 * Download and install the plugin in the `wp-content/plugins` directory.
 * Activate the plugin in WordPress. 
 * Go to `BuySellAds->Settings` and insert your Site Key.
-* Display your Ad Zones via the widgets menu found at `Appearance->Widgets`.
-* If you don't want to use Widgets, you can also add the following code to any one of your theme files with a .php extension:
-  * `<?php if (function_exists('buysellads')) { buysellads($ad_zone); } ?>`
-  * `$ad_zone` signifies the zone ID, you must have a Site Key before the code will work.
-* In order for this plugin to work properly and to utilize the Asynchronous ad code, you'll need to insert a snippet into the header.php of your theme. Directly after the opening `<body>` tag insert `<?php if (function_exists('wp_body_open')) { wp_body_open(); } ?>`. 
-* In the future, support for Asynchronous code insertion will be possible using `wp_head`. However, until IE 6 & 7 have significantly less market share, we're just going to have to make due with adding a simple hook to the header.php. If you don't want to use the `wp_body_open()` code in the header.php the plugin will use `wp_footer()` instead to insert the necessary BSA JavaScript code. However, you will need to verify your theme is using one of the two options available above.
+* Display your Ad Zones via the Widgets menu found at `Appearance->Widgets`.
+* If you don't want to use Widgets, you can add the STEP 2 code from your Ad Code page in the specific location that you want each zone to appear.
 
 == Frequently Asked Questions ==
 
@@ -29,18 +25,19 @@ This official BuySellAds.com WordPress plugin gives you two extremely simple way
 
 Yes!
 
-= Why is the Spanish Translation in English? =
-
-I will modify the translation once people have used the plugin. I want to make sure that the text is clear & concise in English first, then I'll add support for other languages shortly after.
-
 == Screenshots ==
 1. Settings Page
 2. Widgets Menu
 
 == Changelog ==
 
+= 2.3.4 =
+* Insert step-one code via wp_head, deprecate wp_body_open
+* Text changes, including additional highlighting of the BSA WP plugin tutorial
+* Remove English es_ES translation
+
 = 2.3.3 =
-* Prevent whitespace from making it's way into the site key or zoneid values.
+* Prevent whitespace from making its way into the site key or zoneid values.
 
 = 2.3.2 =
 * Only allow Admin level users or greater to view and edit the plugin settings
@@ -51,7 +48,7 @@ I will modify the translation once people have used the plugin. I want to make s
 * Fix default homepage value if configuration file isn't reachable.
 
 = 2.3.0 =
-* Add the ability to detect and display specific ads in Posts for iPhones, iPads, iPods or Andriod devices.
+* Add the ability to detect and display specific ads in Posts for iPhones, iPads, iPods or Android devices.
 * Add the ability to disable the 'Advertise Here' text in the RSS feed.
 
 = 2.2.3 =
@@ -93,13 +90,3 @@ Cleaned up the repo UPGRADE if you downloaded any previous version
 = 1.1 =
 The backfill option has been removed. BuySellAds.com is implementing this feature server side and will no longer require a plugin.
 
-== Translations ==
-
-= Using another language =
-
-If you haven't already, you'll need to modify your `wp-config.php` file. Open it up and look for the line: `define('WPLANG', '');`
-
-You should change it to `define('WPLANG', 'es_ES')` of course, you'll replace `es_ES` with the language extension that you want to use, unless you actually did want the Spanish language translation. 
-
-* List of currently available translations.
-  * Spanish translation: es_ES

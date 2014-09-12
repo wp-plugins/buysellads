@@ -2,7 +2,7 @@
 Contributors: barchard
 Tags: bsa, buy sell ads, ads, ad, ad management, widget, buysellads
 Requires at least: 2.8
-Tested up to: 3.9.1
+Tested up to: 4.0
 Stable tag: 2.3.4
 
 Official BuySellAds.com WordPress plugin.
